@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+     <!-- кнопка добавления клиента -->
+     <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+
+{#                <a class="btn btn-outline-primary" href="{% url 'clients:create_client' %}">Добавить клиента</a>#}
+            </div>
+        </div>
+    </div>
+    <!-- карточки клиентов -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for object in object_list %} <!-- цикл перебирает все объекты -->
+            <!-- карточка клиента в подшаблоне -->
+            {% include 'main/includes/inc_client_card.html' %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
