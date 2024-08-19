@@ -16,6 +16,8 @@ class Client(models.Model):
     last_name = models.CharField(max_length=100, verbose_name='фамилия')
     comment = models.CharField(max_length=255, verbose_name='комментарий', **NULLABLE)
 
+    is_active = models.BooleanField(default=True, verbose_name='активный')
+
     def __str__(self):
         return f'{self.first_name} ' \
                f'{self.last_name} ' \
