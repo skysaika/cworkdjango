@@ -27,21 +27,21 @@
                         {% else %} btn-outline-secondary
                         {% endif %}">View</a>
 
-{#                    <a href="{% url 'clients:client_edit' object.pk %}" class="btn btn-sm#}
-{#                        {% if object.is_active %} btn-outline-primary#}
-{#                        {% else %} btn-outline-secondary#}
-{#                        {% endif %}">Edit</a>#}
+                    <a href="{% url 'clients:client_edit' object.pk %}" class="btn btn-sm
+                        {% if object.is_active %} btn-outline-primary
+                        {% else %} btn-outline-secondary
+                        {% endif %}">Edit</a>
 
-{#                    <a href="{% url 'clients:client_delete' object.pk %}" class="btn btn-sm#}
-{#                        {% if object.is_active %} btn-outline-primary#}
-{#                        {% else %} btn-outline-secondary#}
-{#                        {% endif %}">Delete</a>#}
+                    <a href="{% url 'clients:client_delete' object.pk %}" class="btn btn-sm
+                        {% if object.is_active %} btn-outline-primary
+                        {% else %} btn-outline-secondary
+                        {% endif %}">Delete</a>
 
-{#                    {% if object.is_active %}#}
-{#                        <a href="{% url 'clients:active_clients' object.pk %}" class="btn btn-sm btn-outline-secondary">Deactivate</a>#}
-{#                    {% else %}#}
-{#                        <a href="{% url 'clients:active_clients' object.pk %}" class="btn btn-sm btn-outline-primary">Activate</a>#}
-{#                    {% endif %}#}
+                    {% if object.is_active %}
+                        <a href="{% url 'clients:active_clients' object.pk %}" class="btn btn-sm btn-outline-secondary">Deactivate</a>
+                    {% else %}
+                        <a href="{% url 'clients:active_clients' object.pk %}" class="btn btn-sm btn-outline-primary">Activate</a>
+                    {% endif %}
                 </div>
                 <small class="text-body-secondary" id="availabilityText">
                     {% if object %}
