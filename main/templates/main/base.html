@@ -146,7 +146,7 @@
                     <p class="text-body-secondary">Курсовая работа по блоку Django. </p>
                 </div>
                 <!-- главное меню в подшаблоне templates/includes/inc_main_menu.html -->
-{#                {% include 'main/includes/inc_main_menu.html' %}#}
+                {% include 'main/includes/inc_main_menu.html' %}
             </div>
         </div>
     </div>
@@ -182,7 +182,7 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     {% for object in object_list %}
                         <!-- карточка контента из вложенного шаблон -->
-{#                        {% include 'main/includes/inc_main_card.html' %}#}
+{#                        {% include 'main/includes/inc_client_card.html' %}#}
                     {% endfor %}
                 </div>
             {% endblock %}
