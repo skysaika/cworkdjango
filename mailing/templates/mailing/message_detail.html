@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %} <!-- наследуемся от main/base.html -->
+
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <div class="row">
+                     <div class="col-md-6 offset-md-3">
+                        <div class="card box-shadow">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Сообщение "{{ object.title }}"
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    {{ object.body }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group">
+                                    <a href="{% url 'mailing:message_list' %}" type="button"
+                                       class="btn btn-sm btn-outline-secondary">К сообщениям</a>
+
+                                </div>
+{#                                <!-- счетчик просмотров отдельного материала -->#}
+{#                                Просмотры: {{ object.views_count }}#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
