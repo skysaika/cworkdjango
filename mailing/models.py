@@ -60,7 +60,7 @@ class Mailing(models.Model):
         (RUNNING, 'Запущена'),
         (COMPLETED, 'Завершена'),
     ]
-
+    send_name = models.CharField(max_length=255, verbose_name='имя рассылки', **NULLABLE)
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='связанное сообщение')
     start_time = models.DateTimeField(verbose_name='дата начала рассылки', **NULLABLE)
     end_time = models.DateTimeField(verbose_name='дата окончания рассылки', **NULLABLE)
