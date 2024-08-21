@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from .forms import MessageForm, MailingForm
 from .models import Message, Mailing
@@ -90,6 +90,17 @@ class MailingCreateView(CreateView):
     form_class = MailingForm
     extra_context = {
         'title': 'Создание рассылки'
+    }
+    success_url = reverse_lazy('mailing:mailing_list')
+
+
+class MailingUpdateView(UpdateView):
+    """Редактирование рассылки"""
+    model = Mailing
+    template_name = 'mailing/mailing_form.html'
+    form_class = MailingForm
+    extra_context = {
+        'title': 'Редактирование рассылки'
     }
     success_url = reverse_lazy('mailing:mailing_list')
 

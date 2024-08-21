@@ -16,10 +16,10 @@
                         {% if object.is_published %} btn-outline-primary
                         {% else %} btn-outline-secondary
                         {% endif %}">View</a>
-{#                     <a href="{% url 'mailing:mailing_edit' object.pk %}" class="btn btn-sm#}
-{#                        {% if object.is_published %} btn-outline-primary#}
-{#                        {% else %} btn-outline-secondary#}
-{#                        {% endif %}">Edit</a>#}
+                     <a href="{% url 'mailing:mailing_edit' object.pk %}" class="btn btn-sm
+                        {% if object.is_published %} btn-outline-primary
+                        {% else %} btn-outline-secondary
+                        {% endif %}">Edit</a>
                 </div>
                 <small class="text-body-secondary" id="availabilityText">
                     {% if object and object.status %}
