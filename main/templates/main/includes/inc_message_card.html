@@ -1,0 +1,39 @@
+{% load static %}
+{#{% load filters %}#}
+
+<!-- карточка сообщения-->
+
+<div class="col">
+    <div class="card shadow-sm">
+
+
+        <div class="card-body">
+            <p class="card-text">
+                {{ object.title }}  <!-- тема сообщения -->
+            </p>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+{#                    <a href="{% url 'mailing:mailing_detail' object.pk %}" class="btn btn-sm#}
+{#                        {% if object.is_published %} btn-outline-primary#}
+{#                        {% else %} btn-outline-secondary#}
+{#                        {% endif %}">View</a>#}
+{#                     <a href="{% url 'mailing:mailing_edit' object.pk %}" class="btn btn-sm#}
+{#                        {% if object.is_published %} btn-outline-primary#}
+{#                        {% else %} btn-outline-secondary#}
+{#                        {% endif %}">Edit</a>#}
+                </div>
+                <small class="text-body-secondary" id="availabilityText">
+{#                    {% if object %}#}
+{#                        {% if object.is_published %} <!-- опубликованная рассылка зеленого цвета -->#}
+{#                            <span style="color: green;">Опубликована</span>#}
+{#                        {% else %} <!-- не опубликованная рассылка серого цвета -->#}
+{#                            <span style="color: grey;">Не опубликована</span>#}
+{#                        {% endif %}#}
+{#                    {% endif %}#}
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+

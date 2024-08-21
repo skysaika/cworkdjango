@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+  <title>Список сообщений</title>
+    <!-- карточки сообщений -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for object in object_list %} <!-- цикл перебирает все объекты -->
+            <!-- карточка клиента в подшаблоне -->
+            {% include 'main/includes/inc_message_card.html' %}
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
