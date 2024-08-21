@@ -2,7 +2,7 @@ from django import forms
 from django.forms import CheckboxInput
 
 from clients.models import Client
-from .models import Message
+from .models import Message, Mailing
 
 
 class StyleFormMixin:
@@ -34,3 +34,21 @@ class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
         fields = ('title', 'body', 'recipient', 'is_published')
+
+
+class MailingForm(forms.ModelForm):
+    """Форма для рассылки: время начала, время окончания, периодичность"""
+
+    class Meta:
+        model = Mailing
+        fields = ('send_name','message', 'start_time', 'end_time', 'frequency', 'status')
+        widgets = {
+            'start_time': forms.DateTimeInput(attrs={
+                'type': 'datetime-local',
+                'placeholder': 'Введите дату и время начала'
+            }),
+            'end_time': forms.DateTimeInput(attrs={
+                'type': 'datetime-local',
+                'placeholder': 'Введите дату и время окончания'
+            }),
+        }
