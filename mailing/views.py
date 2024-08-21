@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView
 
 from .forms import MessageForm
 from .models import Message
@@ -28,7 +28,6 @@ class MessageDetailView(DetailView):
     }
 
 
-
 class MessageCreateView(CreateView):
     """Создание сообщения"""
     model = Message
@@ -47,6 +46,16 @@ class MessageUpdateView(CreateView):
     form_class = MessageForm
     extra_context = {
         'title': 'Редактирование сообщения'
+    }
+    success_url = reverse_lazy('mailing:message_list')
+
+
+class MessageDeleteView(DeleteView):
+    """Удаление сообщения"""
+    model = Message
+    template_name = 'mailing/message_confirm_delete.html'
+    extra_context = {
+        'title': 'Удаление сообщения'
     }
     success_url = reverse_lazy('mailing:message_list')
 
