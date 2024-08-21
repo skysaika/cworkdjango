@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, DeleteView
 
 from .forms import MessageForm
-from .models import Message
+from .models import Message, Mailing
 
 
 class MessageListView(ListView):
@@ -58,5 +58,18 @@ class MessageDeleteView(DeleteView):
         'title': 'Удаление сообщения'
     }
     success_url = reverse_lazy('mailing:message_list')
+
+
+class MailingListView(ListView):
+    """Список рассылок"""
+    model = Mailing
+    template_name = 'mailing_list.html'
+    context_object_name = 'object_list'
+    extra_context = {
+        'title': 'Список рассылок'
+    }
+
+    def get_queryset(self):
+        return Mailing.objects.all()
 
 
