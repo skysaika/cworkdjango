@@ -104,3 +104,13 @@ class MailingUpdateView(UpdateView):
     }
     success_url = reverse_lazy('mailing:mailing_list')
 
+
+class MailingDeleteView(DeleteView):
+    """Удаление рассылки"""
+    model = Mailing
+    template_name = 'mailing/mailing_confirm_delete.html'
+    extra_context = {
+        'title': 'Удаление рассылки'
+    }
+    success_url = reverse_lazy('mailing:mailing_list')
+
