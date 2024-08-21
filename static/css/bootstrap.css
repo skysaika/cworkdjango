@@ -2379,6 +2379,10 @@ textarea.form-control-lg {
   margin-left: -1.5em;
 }
 
+.form-check-inline {
+    margin-right: 15px; /* Добавьте отступ между чекбоксами */
+}
+
 .form-check-reverse {
   padding-right: 1.5em;
   padding-left: 0;

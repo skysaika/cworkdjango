@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <!-- форма для создания карточки сообщения-->
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    {% if object %} <!-- если есть объект -->
+                        Редактировать сообщение
+                    {% else %} <!-- если нет объекта -->
+                        Добавить сообщение
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <form method="post">  <!-- не забудь вернуть csrf -->
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">
+                            {% if object %} <!-- если есть объект -->
+                                Сохранить
+                            {% else %} <!-- если нет объекта -->
+                                Создать
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

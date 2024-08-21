@@ -1,6 +1,14 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+     <!-- Кнопка добавления сообщения -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <a class="btn btn-outline-primary" href="{% url 'mailing:message_create' %}">Добавить сообщение</a>
+            </div>
+        </div>
+    </div>
 
   <title>Список сообщений</title>
     <!-- карточки сообщений -->

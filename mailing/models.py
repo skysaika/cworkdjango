@@ -11,16 +11,16 @@ NULLABLE = {'null': True, 'blank': True}
 class Message(models.Model):
     """
     Message Model - модель сообщения
-    title: тема
-    body: текст рассылки
+    title: заголовок сообщения
+    body: текст сообщения
     recipient: клиенты
-    is_published: опубликована
+    is_published: опубликовано
     owner: автор рассылки
     """
-    title = models.CharField(max_length=150, verbose_name='тема письма')
-    body = models.TextField(verbose_name='тело письма')
+    title = models.CharField(max_length=150, verbose_name='заголовок сообщения')
+    body = models.TextField(verbose_name='текст сообщения')
     recipient = models.ManyToManyField(Client, related_name='messages', verbose_name='клиенты')
-    is_published = models.BooleanField(default=False, verbose_name='опубликована')
+    is_published = models.BooleanField(default=False, verbose_name='опубликовано')
 
     def __str__(self):
         return f'{self.title}'
@@ -76,7 +76,7 @@ class Mailing(models.Model):
             raise ValidationError("Дата окончания должна быть больше даты начала.")
 
     def __str__(self):
-        return f'{self.message.title} ({self.get_status_display()})'
+        return f'{self.message.title} - {self.start_time}'
 
     class Meta:
         verbose_name = 'рассылка'
