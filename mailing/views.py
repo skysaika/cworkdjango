@@ -73,14 +73,14 @@ class MailingListView(ListView):
         return Mailing.objects.all()
 
 
-# class MailingDetailView(DetailView):
-#     """Просмотр рассылки"""
-#     model = Mailing
-#     template_name = 'mailing/mailing_detail.html'
-#     context_object_name = 'object_list'
-#     extra_context = {
-#         'title': 'Просмотр рассылки'
-#     }
+class MailingDetailView(DetailView):
+    """Просмотр рассылки"""
+    model = Mailing
+    template_name = 'mailing/mailing_detail.html'
+    context_object_name = 'object_list'
+    extra_context = {
+        'title': 'Просмотр рассылки'
+    }
 
 
 class MailingCreateView(CreateView):
