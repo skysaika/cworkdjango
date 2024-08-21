@@ -39,11 +39,13 @@ class Mailing(models.Model):
     frequency: периодичность рассылки
     status: статус рассылки
     """
+    ONCE = 'once'
     DAILY = 'daily'
     WEEKLY = 'weekly'
     MONTHLY = 'monthly'
 
     PERIOD_CHOICES = [
+        (ONCE, 'Разово'),
         (DAILY, 'Ежедневно'),
         (WEEKLY, 'Еженедельно'),
         (MONTHLY, 'Ежемесячно'),
