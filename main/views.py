@@ -28,4 +28,8 @@ class IndexView(TemplateView):
         total_mailings_count = Mailing.objects.count()
         context['total_mailings_count'] = total_mailings_count
 
+        # Подсчитываем проведенные рассылки (например, статус "завершена" или "запущена")
+        conducted_mailings_count = Mailing.objects.filter(status__in=['completed', 'running']).count()
+        context['conducted_mailings_count'] = conducted_mailings_count
+
         return context
