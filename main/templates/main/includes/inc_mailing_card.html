@@ -13,30 +13,29 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                     <a href="{% url 'mailing:mailing_detail' object.pk %}" class="btn btn-sm
-                        {% if object.status == 'running' %} btn-outline-primary
-                        {% elif object.status == 'completed' %} btn-outline-success
-                        {% elif object.status == 'created' %} btn-outline-secondary
-                        {% elif object.status == 'draft' %} btn-outline-warning
-                        {% else %} btn-outline-light
+                        {% if object.status == 'draft' %} btn-outline-secondary
+                        {% else %} btn-outline-primary
                         {% endif %}">View</a>
                     <a href="{% url 'mailing:mailing_edit' object.pk %}" class="btn btn-sm
-                        {% if object.status == 'running' %} btn-outline-primary
-                        {% elif object.status == 'completed' %} btn-outline-success
-                        {% elif object.status == 'created' %} btn-outline-secondary
-                        {% elif object.status == 'draft' %} btn-outline-warning
-                        {% else %} btn-outline-light
+                         {% if object.status == 'draft' %} btn-outline-secondary
+                        {% else %} btn-outline-primary
                         {% endif %}">Edit</a>
+
+                    <a href="{% url 'mailing:mailing_delete' object.pk %}" class="btn btn-sm
+                         {% if object.status == 'draft' %} btn-outline-secondary
+                        {% else %} btn-outline-primary
+                        {% endif %}">Delete</a>
                 </div>
                 <small class="text-body-secondary" id="availabilityText">
                     {% if object and object.status %}
                         {% if object.status == 'running' %}
                             <span style="color: green;">Запущена</span>
                         {% elif object.status == 'completed' %}
-                            <span style="color: blue;">Завершена</span>
+                            <span style="color: green;">Завершена</span>
                         {% elif object.status == 'created' %}
                             <span style="color: gray;">Создана</span>
                         {% elif object.status == 'draft' %}
-                            <span style="color: orange;">Черновик</span>
+                            <span style="color: gray;">Черновик</span>
                         {% endif %}
                     {% endif %}
                 </small>
