@@ -1,0 +1,46 @@
+[
+  {
+    "model": "clients.client",
+    "pk": 1,
+    "fields": {
+      "email": "test1@mail.com",
+      "first_name": "petr",
+      "last_name": "petrov",
+      "comment": "comment #1",
+      "is_active": true
+    }
+  },
+  {
+    "model": "clients.client",
+    "pk": 2,
+    "fields": {
+      "email": "test2@mail.com",
+      "first_name": "ivan",
+      "last_name": "ivanov",
+      "comment": "comment #2",
+      "is_active": true
+    }
+  },
+  {
+    "model": "clients.client",
+    "pk": 3,
+    "fields": {
+      "email": "test3@mail.com",
+      "first_name": "semen",
+      "last_name": "semenov",
+      "comment": "comment #3",
+      "is_active": true
+    }
+  },
+  {
+    "model": "clients.client",
+    "pk": 4,
+    "fields": {
+      "email": "test4@mail.com",
+      "first_name": "dmitry",
+      "last_name": "dmitrievich",
+      "comment": "comment #4",
+      "is_active": false
+    }
+  }
+]

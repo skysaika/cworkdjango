@@ -1,0 +1,77 @@
+[
+  {
+    "model": "mailing.message",
+    "pk": 1,
+    "fields": {
+      "title": "test send #1",
+      "body": "test text #1",
+      "is_published": true,
+      "recipient": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "mailing.message",
+    "pk": 3,
+    "fields": {
+      "title": "Message #2",
+      "body": "Пробный мяч номер 2",
+      "is_published": true,
+      "recipient": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "mailing.message",
+    "pk": 4,
+    "fields": {
+      "title": "Sending #3",
+      "body": "просто проверка связи number 3",
+      "is_published": false,
+      "recipient": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailing",
+    "pk": 1,
+    "fields": {
+      "send_name": "Sending #1",
+      "message": 1,
+      "start_time": "2024-08-21T21:18:00Z",
+      "end_time": "2024-08-21T21:19:00Z",
+      "frequency": "once",
+      "status": "running"
+    }
+  },
+  {
+    "model": "mailing.mailing",
+    "pk": 2,
+    "fields": {
+      "send_name": "Sending #2",
+      "message": 3,
+      "start_time": null,
+      "end_time": null,
+      "frequency": "once",
+      "status": "created"
+    }
+  },
+  {
+    "model": "mailing.mailing",
+    "pk": 3,
+    "fields": {
+      "send_name": "Рассылка номер три",
+      "message": 4,
+      "start_time": "2024-08-21T23:46:00Z",
+      "end_time": "2024-08-21T23:48:00Z",
+      "frequency": "once",
+      "status": "completed"
+    }
+  }
+]
