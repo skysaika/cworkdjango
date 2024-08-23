@@ -9,5 +9,5 @@ app_name = UsersConfig.name
 urlpatterns = [
     path('', LoginView.as_view(), name='login'),  # маршрут для входа
     path('logout/', LogoutView.as_view(), name='logout'),  # маршрут для выхода
-    path('regoster/', RegisterView.as_view(), name='register'),  # маршрут для регистрации
+    path('register/', RegisterView.as_view(), name='register'),  # маршрут для регистрации
 ]
