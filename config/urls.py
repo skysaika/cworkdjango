@@ -24,4 +24,6 @@ urlpatterns = [
     path('', include('main.urls', namespace='main')),  # путь до приложения main
     path('clients/', include('clients.urls', namespace='clients')),  # путь до приложения clients
     path('mailing/', include('mailing.urls', namespace='mailing')),  # путь до приложения mailing
+
+    path('users/', include('users.urls', namespace='users')),  # путь до приложения users
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
