@@ -25,8 +25,8 @@ class RegisterView(CreateView):
     success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
-        """Функция для валидации формы отправки приветствия"""
-        new_user = form.save()
+        """Отправка письма с приветствием при регистрации"""
+        new_user = form.save()  # сохраняем пользователя
         send_mail(
             subject='Поздравляем с регистрацией',
             message='Вы зарегистрировались на нашем учебном сайте, добро пожаловать!',

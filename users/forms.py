@@ -14,14 +14,13 @@ class UserRegisterForm(StyleFormMixin, UserCreationForm):
 
 
 class UserForm(StyleFormMixin, UserChangeForm):
-    """Форма редактирования профиля"""
+    """Форма редактирования профиля пользователя"""
 
     class Meta:
         model = User
         fields = ('email', 'password', 'first_name', 'last_name')
 
-     # Изменим стили для полей ввода пароля, спрятав его
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['password'].widget = forms.HiddenInput()
+        self.fields['password'].widget = forms.HiddenInput()  # спрячем поле пароля
