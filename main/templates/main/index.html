@@ -2,10 +2,38 @@
 {% load static %}
 
 {% block content %}
-<h1>Статистика по рассылкам</h1>
-    <p>Общее количество рассылок: {{ total_mailings_count }}</p>
-    <p>Количество проведенных рассылок: {{ conducted_mailings_count }}</p>
-    <p>Общее количество уникальных клиентов: {{ unique_clients_count }}</p>
-    <p>Общее количество активных клиентов: {{ active_clients_count }}</p>
 
+    <h1>Статистика по рассылкам</h1>
+    <ul>
+        <li>Общее количество рассылок: {{ total_mailings_count }}</li>
+        <li>Количество проведенных рассылок: {{ conducted_mailings_count }}</li>
+        <li>Общее количество уникальных клиентов: {{ unique_clients_count }}</li>
+        <li>Общее количество активных клиентов: {{ active_clients_count }}</li>
+    </ul>
+    <h2>Последние сообщения</h2>
+    <ul>
+        {% for message in last_messages %}
+            <li>{{ message.title }} - {{ message.body|truncatewords:10 }}</li>
+        {% empty %}
+            <li>Нет сообщений.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Последние рассылки</h2>
+    <ul>
+        {% for mailing in last_mailings %}
+            <li>{{ mailing.send_name }} - {{ mailing.start_time }}</li>
+        {% empty %}
+            <li>Нет рассылок.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Наши клиенты</h2>
+    <ul>
+        {% for client in last_active_clients %}
+            <li>{{ client.name }} - {{ client.email }}</li>
+        {% empty %}
+            <li>Нет активных клиентов.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

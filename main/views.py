@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from clients.models import Client
-from mailing.models import Mailing
+from mailing.models import Mailing, Message
 
 
 class IndexView(TemplateView):
@@ -31,5 +31,14 @@ class IndexView(TemplateView):
         # Подсчитываем проведенные рассылки (например, статус "завершена" или "запущена")
         conducted_mailings_count = Mailing.objects.filter(status__in=['completed', 'running']).count()
         context['conducted_mailings_count'] = conducted_mailings_count
+
+        # Последние 3 сообщения
+        context['last_messages'] = Message.objects.order_by('-id')[:3]  # id увеличивается с каждым сообщением
+
+        # Последние 3 рассылки
+        context['last_mailings'] = Mailing.objects.order_by('-id')[:3]  # id увеличивается
+
+        # Последние 3 активных клиента (созданных пользователем, например, с полем owner)
+        context['last_active_clients'] = Client.objects.filter(is_active=True).order_by('-id')[:3]
 
         return context
