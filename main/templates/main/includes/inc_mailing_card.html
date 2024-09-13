@@ -31,11 +31,11 @@
                         {% if object.status == 'running' %}
                             <span style="color: green;">Запущена</span>
                         {% elif object.status == 'completed' %}
-                            <span style="color: green;">Завершена</span>
+                            <span style="color: gray;">Завершена</span>
                         {% elif object.status == 'created' %}
                             <span style="color: gray;">Создана</span>
                         {% elif object.status == 'draft' %}
-                            <span style="color: gray;">Черновик</span>
+                            <span style="color: orange;">Черновик</span>
                         {% endif %}
                     {% endif %}
                 </small>
