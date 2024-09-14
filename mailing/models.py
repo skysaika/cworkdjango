@@ -80,6 +80,9 @@ class Mailing(models.Model):
                                  verbose_name='периодичность', **NULLABLE)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=DRAFT,
                               verbose_name='статус рассылки', **NULLABLE)
+    # автор рассылки
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
+                              verbose_name='автор рассылки')
 
     def clean(self):
         # Проверка, что дата окончания больше даты начала

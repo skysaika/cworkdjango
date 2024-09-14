@@ -10,6 +10,9 @@
             <p class="card-text">
                 {{ object.send_name }}  <!-- тема рассылки -->
             </p>
+            <p class="card-text text-muted">
+                Автор: {{ object.owner }} <!-- Отображение имени автора -->
+            </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                     <a href="{% url 'mailing:mailing_detail' object.pk %}" class="btn btn-sm

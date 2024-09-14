@@ -16,21 +16,26 @@
                     <div class="card-body">
                         <table class="table">
                             <tr>
-                                <td>Название </td>
+                                <td>Название</td>
                                 <td>{{ object.send_name|title }}</td>
                             </tr>
-                        <tr>
-                                <td>Дата создания </td>
+                            <tr>
+                                <td>Автор</td>
+                                <td>{{ object.author.username }}</td>  <!-- Добавлено поле автора -->
+                            </tr>
+                            <tr>
+                                <td>Дата создания</td>
                                 <td>{{ object.start_time }}</td>
                             </tr>
                             <tr>
-                                <td>Дата окончания </td>
+                                <td>Дата окончания</td>
                                 <td>{{ object.end_time }}</td>
                             </tr>
                             <tr>
-                                <td>Сообщение </td>
+                                <td>Сообщение</td>
                                 <td>{{ object.message }}</td>
                             </tr>
+
                         </table>
 
                     </div>

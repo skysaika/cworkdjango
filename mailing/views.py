@@ -100,6 +100,11 @@ class MailingCreateView(CreateView):
     }
     success_url = reverse_lazy('mailing:mailing_list')
 
+    def form_valid(self, form):
+        """Создаваемая рассылка принадлежит текущему пользователю"""
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
 
 class MailingUpdateView(UpdateView):
     """Редактирование рассылки"""
