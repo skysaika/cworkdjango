@@ -37,6 +37,9 @@ class Message(models.Model):
     class Meta:
         verbose_name = 'сообщение'
         verbose_name_plural = 'сообщения'
+        permissions = [
+            ('can_view_message', 'Can view message'),  # разрешение на просмотр сообщений
+        ]
 
 
 class Mailing(models.Model):
@@ -95,6 +98,11 @@ class Mailing(models.Model):
     class Meta:
         verbose_name = 'рассылка'
         verbose_name_plural = 'рассылки'
+        permissions = [
+            ('can_view_mailing', 'Can view mailing'),  # разрешение на просмотр рассылок
+            ('can_send_mailing', 'Can send mailing'),  # разрешение на отправку рассылок
+            ('can_disable_mailing', 'Can disable mailing'),  # разрешение на отключение рассылок
+        ]
 
 
 class Log(models.Model):

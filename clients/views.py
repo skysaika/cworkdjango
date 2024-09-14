@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -27,10 +28,11 @@ class ClientDetailView(LoginRequiredMixin, DetailView):
     }
 
 
-class ClientCreateView(LoginRequiredMixin, CreateView):
+class ClientCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     """Создание клиента"""
     model = Client
     form_class = ClientForm  # форма для создания клиента
+    permission_required = 'clients.add_client'
     template_name = 'clients/client_form.html'
     extra_context = {
         'title': 'Создание клиента'
@@ -43,18 +45,26 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ClientUpdateView(LoginRequiredMixin, UpdateView):
+class ClientUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     """Редактирование клиента"""
     model = Client
     form_class = ClientForm  # форма для редактирования клиента
+    permission_required = 'clients.change_client'
     template_name = 'clients/client_form.html'
     extra_context = {
         'title': 'Редактирование клиента'
     }
     success_url = reverse_lazy('clients:client_list')
 
+    def get_object(self, queryset=None):
+        """Редактировать можно только свои записи клиентов"""
+        self.object = super().get_object(queryset)
+        if self.object.owner != self.request.user:
+            raise Http404('Вы не можете редактировать чужие записи о клиентах')
+        return self.object
 
-class ClientDeleteView(LoginRequiredMixin, DeleteView):
+
+class ClientDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """Удаление клиента"""
     model = Client
     template_name = 'clients/client_confirm_delete.html'
@@ -62,6 +72,10 @@ class ClientDeleteView(LoginRequiredMixin, DeleteView):
         'title': 'Удаление клиента'
     }
     success_url = reverse_lazy('clients:client_list')
+
+    def test_func(self):
+        """Только суперпользователь может удалять клиентов"""
+        return self.request.user.is_superuser
 
 
 @login_required

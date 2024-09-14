@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
@@ -56,6 +57,13 @@ class MessageUpdateView(LoginRequiredMixin, UpdateView):
         'title': 'Редактирование сообщения'
     }
     success_url = reverse_lazy('mailing:message_list')
+
+    def get_object(self, queryset=None):
+        """Редактировать сообщение может только создатель сообщения"""
+        self.object = super().get_object(queryset)
+        if self.object.owner != self.request.user:
+            raise Http404('Вы не можете редактировать это сообщение')
+        return self.object
 
 
 class MessageDeleteView(LoginRequiredMixin, DeleteView):
@@ -117,8 +125,16 @@ class MailingUpdateView(LoginRequiredMixin, UpdateView):
     }
     success_url = reverse_lazy('mailing:mailing_list')
 
+    def get_object(self, queryset=None):
+        """Редактировать рассылку может только создатель рассылки"""
+        self.object = super().get_object(queryset)
+        if self.object.owner != self.request.user:
+            raise Http404('Вы не можете редактировать рассылки других пользователей')
+        return self.object
 
-class MailingDeleteView(LoginRequiredMixin, DeleteView):
+
+
+class MailingDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """Удаление рассылки"""
     model = Mailing
     template_name = 'mailing/mailing_confirm_delete.html'
@@ -126,6 +142,10 @@ class MailingDeleteView(LoginRequiredMixin, DeleteView):
         'title': 'Удаление рассылки'
     }
     success_url = reverse_lazy('mailing:mailing_list')
+
+    def test_func(self):
+        """Удалить рассылку может суперпользователь"""
+        return self.request.user.is_superuser
 
 
 # @login_required
