@@ -35,6 +35,11 @@ class ClientCreateView(CreateView):
     }
     success_url = reverse_lazy('clients:client_list')
 
+    def form_valid(self, form):
+        """Созданная запись о клиенте принадлежит текущему пользователю"""
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
 
 class ClientUpdateView(UpdateView):
     """Редактирование клиента"""

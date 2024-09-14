@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 NULLABLE = {'null': True, 'blank': True}
@@ -17,6 +18,8 @@ class Client(models.Model):
     comment = models.CharField(max_length=255, verbose_name='комментарий', **NULLABLE)
 
     is_active = models.BooleanField(default=True, verbose_name='активный')
+    # пользователь, создавший запись о клиенте:
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE)
 
     def __str__(self):
         return f'{self.first_name} ' \

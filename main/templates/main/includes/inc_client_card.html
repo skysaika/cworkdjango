@@ -19,6 +19,13 @@
                 {% if object.email %}
                     {{ object.email|lower }} <!-- почта с маленькой буквы -->
                 {% endif %}
+                <!-- Информация о пользователе, создавшем запись -->
+                <br>
+                {% if object.owner %}
+                    Запись от: {{ object.owner }} <!-- имя пользователя -->
+                {% else %}
+                    Запись от: -
+                {% endif %}
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
