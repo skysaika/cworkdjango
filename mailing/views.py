@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
@@ -38,8 +40,13 @@ class MessageCreateView(CreateView):
     }
     success_url = reverse_lazy('mailing:message_list')
 
+    def form_valid(self, form):
+        """Создаваемое сообщение принадлежит текущему пользователю"""
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
-class MessageUpdateView(CreateView):
+
+class MessageUpdateView(UpdateView):
     """Редактирование сообщения"""
     model = Message
     template_name = 'mailing/message_form.html'
@@ -114,3 +121,10 @@ class MailingDeleteView(DeleteView):
     }
     success_url = reverse_lazy('mailing:mailing_list')
 
+
+# @login_required
+# def toggle_publish(request, pk):
+#     message = get_object_or_404(Message, pk=pk, author=request.user)
+#     message.is_published = not message.is_published
+#     message.save()
+#     return redirect('mailing:message_detail', pk=pk)

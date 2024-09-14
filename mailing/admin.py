@@ -5,8 +5,8 @@ from .models import Message, Mailing, Log
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'body', 'is_published')
-    list_filter = ('title', 'is_published')
+    list_display = ('title', 'body', 'is_published', 'owner')
+    list_filter = ('title', 'is_published', 'owner')
     search_fields = ('title',)
 
 

@@ -9,6 +9,9 @@
             <p class="card-text">
                 {{ object.title|title }}  <!-- заголовок сообщения c заглавной буквы -->
             </p>
+            <p class="card-text text-muted">
+                Автор: {{ object.owner }} <!-- Отображение имени автора -->
+            </p>
 
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
