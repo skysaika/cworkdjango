@@ -150,6 +150,8 @@ AUTH_USER_MODEL = 'users.User'
 LOGOUT_REDIRECT_URL = '/'
 # Redirect after login
 LOGIN_REDIRECT_URL = '/'
+# Permissions for authenticated user
+LOGIN_URL = '/users/'
 
 # настройки для показа сообщения из письма в консоли
 if DEBUG:

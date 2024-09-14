@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
@@ -5,7 +6,7 @@ from clients.models import Client
 from mailing.models import Mailing, Message
 
 
-class IndexView(TemplateView):
+class IndexView(LoginRequiredMixin, TemplateView):
     """Представление главной страницы."""
     template_name = 'main/index.html'
     extra_context = {

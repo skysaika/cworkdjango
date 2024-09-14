@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -7,7 +9,7 @@ from clients.models import Client
 
 
 # Create your views here.
-class ClientListView(ListView):
+class ClientListView(LoginRequiredMixin, ListView):
     """Просмотр списка клиентов"""
     model = Client
     template_name = 'clients/client_list.html'
@@ -16,7 +18,7 @@ class ClientListView(ListView):
     }
 
 
-class ClientDetailView(DetailView):
+class ClientDetailView(LoginRequiredMixin, DetailView):
     """Просмотр информации о клиенте"""
     model = Client
     template_name = 'clients/client_detail.html'
@@ -25,7 +27,7 @@ class ClientDetailView(DetailView):
     }
 
 
-class ClientCreateView(CreateView):
+class ClientCreateView(LoginRequiredMixin, CreateView):
     """Создание клиента"""
     model = Client
     form_class = ClientForm  # форма для создания клиента
@@ -41,7 +43,7 @@ class ClientCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ClientUpdateView(UpdateView):
+class ClientUpdateView(LoginRequiredMixin, UpdateView):
     """Редактирование клиента"""
     model = Client
     form_class = ClientForm  # форма для редактирования клиента
@@ -52,7 +54,7 @@ class ClientUpdateView(UpdateView):
     success_url = reverse_lazy('clients:client_list')
 
 
-class ClientDeleteView(DeleteView):
+class ClientDeleteView(LoginRequiredMixin, DeleteView):
     """Удаление клиента"""
     model = Client
     template_name = 'clients/client_confirm_delete.html'
@@ -62,6 +64,7 @@ class ClientDeleteView(DeleteView):
     success_url = reverse_lazy('clients:client_list')
 
 
+@login_required
 def toggle_active(request, pk):
     """Переключение активности клиента FBV"""
     client_item = get_object_or_404(Client, pk=pk)

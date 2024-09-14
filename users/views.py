@@ -4,6 +4,7 @@ import string
 
 from django.conf import settings
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib.auth.views import LogoutView as BaseLogoutView
@@ -116,9 +117,7 @@ class EmailConfirmFailedView(TemplateView):
         return context
 
 
-
-
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     """Контроллер для редактирования профиля"""
     model = User
     success_url = reverse_lazy('users:profile')

@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
@@ -7,7 +8,7 @@ from .forms import MessageForm, MailingForm
 from .models import Message, Mailing
 
 
-class MessageListView(ListView):
+class MessageListView(LoginRequiredMixin, ListView):
     """Список сообщений"""
     model = Message
     template_name = 'mailing/message_list.html'
@@ -20,7 +21,7 @@ class MessageListView(ListView):
         return Message.objects.all()
 
 
-class MessageDetailView(DetailView):
+class MessageDetailView(LoginRequiredMixin, DetailView):
     """Просмотр сообщения"""
     model = Message
     template_name = 'mailing/message_detail.html'
@@ -30,7 +31,7 @@ class MessageDetailView(DetailView):
     }
 
 
-class MessageCreateView(CreateView):
+class MessageCreateView(LoginRequiredMixin, CreateView):
     """Создание сообщения"""
     model = Message
     template_name = 'mailing/message_form.html'
@@ -46,7 +47,7 @@ class MessageCreateView(CreateView):
         return super().form_valid(form)
 
 
-class MessageUpdateView(UpdateView):
+class MessageUpdateView(LoginRequiredMixin, UpdateView):
     """Редактирование сообщения"""
     model = Message
     template_name = 'mailing/message_form.html'
@@ -57,7 +58,7 @@ class MessageUpdateView(UpdateView):
     success_url = reverse_lazy('mailing:message_list')
 
 
-class MessageDeleteView(DeleteView):
+class MessageDeleteView(LoginRequiredMixin, DeleteView):
     """Удаление сообщения"""
     model = Message
     template_name = 'mailing/message_confirm_delete.html'
@@ -67,7 +68,7 @@ class MessageDeleteView(DeleteView):
     success_url = reverse_lazy('mailing:message_list')
 
 
-class MailingListView(ListView):
+class MailingListView(LoginRequiredMixin, ListView):
     """Список рассылок"""
     model = Mailing
     template_name = 'mailing/mailing_list.html'
@@ -80,7 +81,7 @@ class MailingListView(ListView):
         return Mailing.objects.all()
 
 
-class MailingDetailView(DetailView):
+class MailingDetailView(LoginRequiredMixin, DetailView):
     """Просмотр рассылки"""
     model = Mailing
     template_name = 'mailing/mailing_detail.html'
@@ -90,7 +91,7 @@ class MailingDetailView(DetailView):
     }
 
 
-class MailingCreateView(CreateView):
+class MailingCreateView(LoginRequiredMixin, CreateView):
     """Создание рассылки"""
     model = Mailing
     template_name = 'mailing/mailing_form.html'
@@ -106,7 +107,7 @@ class MailingCreateView(CreateView):
         return super().form_valid(form)
 
 
-class MailingUpdateView(UpdateView):
+class MailingUpdateView(LoginRequiredMixin, UpdateView):
     """Редактирование рассылки"""
     model = Mailing
     template_name = 'mailing/mailing_form.html'
@@ -117,7 +118,7 @@ class MailingUpdateView(UpdateView):
     success_url = reverse_lazy('mailing:mailing_list')
 
 
-class MailingDeleteView(DeleteView):
+class MailingDeleteView(LoginRequiredMixin, DeleteView):
     """Удаление рассылки"""
     model = Mailing
     template_name = 'mailing/mailing_confirm_delete.html'
