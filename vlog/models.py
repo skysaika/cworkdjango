@@ -33,3 +33,6 @@ class VlogPost(models.Model):
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
         ordering = ['-created']
+        permissions = [
+            ('can_publish', 'Может опубликовать'),
+        ]
