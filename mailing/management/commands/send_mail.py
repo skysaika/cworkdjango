@@ -1,3 +1,4 @@
+import datetime
 import logging
 from django.core.management.base import BaseCommand
 from django.utils import timezone
@@ -5,13 +6,13 @@ from django.core.mail import send_mail
 from mailing.models import Mailing, Log
 
 # Настройка логирования
-logging.basicConfig(filename='mailer.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='mailing.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class Command(BaseCommand):
     help = 'Send scheduled mailings'
 
-    def handle(self, *args, **kwargs):
-        now = timezone.now()
+    def handle(self, *args, **options):
+        now = datetime.datetime.now().date()
         mailings = Mailing.objects.filter(start_time__lte=now, end_time__gte=now, status='RUNNING')
 
         for mailing in mailings:
@@ -21,7 +22,7 @@ class Command(BaseCommand):
                     send_mail(
                         subject=mailing.send_name,
                         message=mailing.message.body,
-                        from_email='skysaika@yandex.ru',  # Укажите свой email
+                        from_email='skysaika@yandex.ru',
                         recipient_list=recipient_list,
                         fail_silently=False
                     )
