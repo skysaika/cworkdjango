@@ -98,6 +98,19 @@ class MailingDetailView(LoginRequiredMixin, DetailView):
         'title': 'Просмотр рассылки'
     }
 
+    def get_object(self, queryset=None):
+        """Просмотр рассылки может только создатель рассылки"""
+        self.object = super().get_object(queryset)
+        if self.object.owner != self.request.user:
+            raise Http404('Вы не можете просматривать это рассылку')
+        return self.object
+
+    def get_context_data(self, **kwargs):
+        """Добавляем логи в контекст"""
+        context = super().get_context_data(**kwargs)
+        context['logs'] = Log.objects.filter(mailing=self.object).order_by('-send_time')
+        return context
+
 
 class MailingCreateView(LoginRequiredMixin, CreateView):
     """Создание рассылки"""
