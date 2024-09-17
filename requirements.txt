@@ -3,6 +3,7 @@ asttokens==2.4.1
 DateTime==5.5
 decorator==5.1.1
 Django==4.2.9
+django-crontab==0.7.1
 executing==2.0.1
 ipython==8.26.0
 jedi==0.19.1
