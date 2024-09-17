@@ -21,7 +21,7 @@
                             </tr>
                             <tr>
                                 <td>Автор</td>
-                                <td>{{ object.author.username }}</td>  <!-- Добавлено поле автора -->
+                                <td>{{ object.owner }}</td>  <!-- Добавлено поле автора -->
                             </tr>
                             <tr>
                                 <td>Дата создания</td>
@@ -35,18 +35,51 @@
                                 <td>Сообщение</td>
                                 <td>{{ object.message }}</td>
                             </tr>
-
                         </table>
-
                     </div>
 
                     <div class="card-footer">
                         <div class="btn-group">
                             <a href="{% url 'mailing:mailing_list' %}" type="button"
                                class="btn btn-sm btn-outline-secondary">К рассылкам</a>
-
                         </div>
-
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card box-shadow h-100">
+                    <div class="card-header">
+                        <h4 class="card-title text-center">Логи рассылки</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Время попытки</th>
+                                    <th>Статус</th>
+                                    <th>Ответ сервера</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for log in logs %}
+                                <tr>
+                                    <td>{{ log.send_time }}</td>
+                                    <td>{{ log.get_attempt_status_display }}</td>
+                                    <td>{{ log.server_response }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3">Логи отсутствуют.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                <div class="card-footer">
+                        <div class="btn-group">
+                            <a href="{% url 'mailing:log_list' %}" type="button"
+                               class="btn btn-sm btn-outline-secondary">К списку логов</a>
+                        </div>
                     </div>
                 </div>
             </div>
