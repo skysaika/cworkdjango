@@ -22,9 +22,9 @@
                 <!-- Информация о пользователе, создавшем запись -->
                 <br>
                 {% if object.owner %}
-                    Запись от: {{ object.owner }} <!-- имя пользователя -->
+                    Кем создана запись: {{ object.owner }} <!-- имя пользователя -->
                 {% else %}
-                    Запись от: Неизвестно
+                    Кем создана запись: Неизвестно
                 {% endif %}
             </p>
             <div class="d-flex justify-content-between align-items-center">
@@ -33,21 +33,26 @@
                         {% if object.is_active %} btn-outline-primary
                         {% else %} btn-outline-secondary
                         {% endif %}">View</a>
-
+                    {% if object.owner == user or user.is_superuser %}
                     <a href="{% url 'clients:client_edit' object.pk %}" class="btn btn-sm
                         {% if object.is_active %} btn-outline-primary
                         {% else %} btn-outline-secondary
                         {% endif %}">Edit</a>
+                    {% endif %}
                     {% if user.is_superuser %}
                     <a href="{% url 'clients:client_delete' object.pk %}" class="btn btn-sm
                         {% if object.is_active %} btn-outline-primary
                         {% else %} btn-outline-secondary
                         {% endif %}">Delete</a>
                     {% endif %}
-                    {% if object.is_active %}
-                        <a href="{% url 'clients:active_clients' object.pk %}" class="btn btn-sm btn-outline-secondary">Deactivate</a>
-                    {% else %}
-                        <a href="{% url 'clients:active_clients' object.pk %}" class="btn btn-sm btn-outline-primary">Activate</a>
+                    {% if object.owner == user or user.is_superuser %}
+                        {% if object.is_active %}
+                            <a href="{% url 'clients:active_clients' object.pk %}"
+                               class="btn btn-sm btn-outline-secondary">Deactivate</a>
+                        {% else %}
+                            <a href="{% url 'clients:active_clients' object.pk %}"
+                               class="btn btn-sm btn-outline-primary">Activate</a>
+                        {% endif %}
                     {% endif %}
                 </div>
                 <small class="text-body-secondary" id="availabilityText">

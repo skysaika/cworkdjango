@@ -18,6 +18,13 @@ class ClientListView(LoginRequiredMixin, ListView):
         'title': 'Список клиентов'
     }
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # добавление is_owner
+        for client in context['object_list']:
+            client.is_owner = client.owner == self.request.user
+        return context
+
 
 class ClientDetailView(LoginRequiredMixin, DetailView):
     """Просмотр информации о клиенте"""
