@@ -3,6 +3,7 @@ from datetime import datetime
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 
 from clients.models import Client
 
@@ -26,10 +27,10 @@ class Message(models.Model):
     # сообщение принадлежит текущему пользователю:
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
                               verbose_name='автор сообщения')
-    #
-    # def clean(self):
-    #     if self.is_published and not self.owner:
-    #         raise ValidationError('Поле "автор рассылки" обязательно к заполнению.')
+
+    def clean(self):
+        if self.is_published and not self.owner:
+            raise ValidationError('Поле "автор рассылки" обязательно к заполнению.')
 
     def __str__(self):
         return f'{self.title}'
@@ -87,10 +88,18 @@ class Mailing(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
                               verbose_name='автор рассылки')
 
+    # def clean(self):
+    #     # Проверка, что дата окончания больше даты начала
+    #     if self.end_time and self.start_time and self.end_time <= self.start_time:
+    #         raise ValidationError("Дата окончания должна быть больше даты начала.")
     def clean(self):
         # Проверка, что дата окончания больше даты начала
         if self.end_time and self.start_time and self.end_time <= self.start_time:
             raise ValidationError("Дата окончания должна быть больше даты начала.")
+
+        # Проверка правильности периодичности
+        if self.frequency not in dict(self.PERIOD_CHOICES):
+            raise ValidationError("Периодичность рассылки указана неверно.")
 
     def __str__(self):
         return f'{self.message.title} - {self.start_time}'
@@ -128,6 +137,15 @@ class Log(models.Model):
 
     def __str__(self):
         return f'{self.mailing.message.title} - {self.send_time}'
+
+    def clean(self):
+        # Проверка статуса попытки
+        if self.attempt_status not in dict(self.STATUS_CHOICES):
+            raise ValidationError("Статус попытки должен быть 'success' или 'failed'.")
+
+        # Проверка времени
+        if self.send_time > timezone.now():
+            raise ValidationError("Время попытки не может быть в будущем.")
 
     class Meta:
         verbose_name = 'лог'
