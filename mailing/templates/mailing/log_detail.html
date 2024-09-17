@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <table>
+        <tr>
+            <th>Рассылка</th>
+            <th>Время попытки</th>
+            <th>Статус</th>
+        </tr>
+        <tr>
+            <td>{{ log.mailing.send_name }}</td>
+            <td>{{ log.send_time }}</td>
+            <td>{{ log.attempt_status }}</td>
+        </tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <table>
+        <tr>
+            <th>Рассылка</th>
+            <th>Время попытки</th>
+            <th>Статус</th>
+            <th></th>
+        </tr>
+        {% for log in object_list %}
+            <tr>
+                <td>{{ log.mailing.send_name }}</td>
+                <td>{{ log.send_time }}</td>
+                <td>{{ log.attempt_status }}</td>
+                <td><a href="{% url 'mailing:log_detail' log.pk %}">Просмотр</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="card-footer">
+        <div class="btn-group">
+            <a href="{% url 'mailing:mailing_list' %}" type="button"
+               class="btn btn-sm btn-outline-secondary">К рассылкам</a>
+        </div>
+    </div>
+{% endblock %}
