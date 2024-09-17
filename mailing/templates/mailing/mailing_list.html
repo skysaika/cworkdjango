@@ -6,10 +6,11 @@
      <!-- кнопка добавления рассылки -->
      <div class="container">
         <div class="row">
+            {% if user.is_authenticated %}
             <div class="col-12 mb-5">
-
                 <a class="btn btn-outline-primary" href="{% url 'mailing:mailing_create' %}">Добавить рассылку</a>
             </div>
+            {% endif %}
         </div>
     </div>
     <!-- список всех рассылок -->
