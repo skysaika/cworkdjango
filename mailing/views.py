@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from .forms import MessageForm, MailingForm
-from .models import Message, Mailing
+from .models import Message, Mailing, Log
 
 
 class MessageListView(LoginRequiredMixin, ListView):
@@ -154,3 +154,21 @@ class MailingDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 #     message.is_published = not message.is_published
 #     message.save()
 #     return redirect('mailing:message_detail', pk=pk)
+
+class LogListView(LoginRequiredMixin, ListView):
+    """Список логов"""
+    model = Log
+    template_name = 'mailing/log_list.html'
+    context_object_name = 'object_list'
+    extra_context = {'title': 'Список логов'}
+
+    def get_queryset(self):
+        return Log.objects.all()
+
+
+class LogDetailView(LoginRequiredMixin, DetailView):
+    """Просмотр лога"""
+    model = Log
+    template_name = 'mailing/log_detail.html'
+    context_object_name = 'log'
+    extra_context = {'title': 'Просмотр лога'}
