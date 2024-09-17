@@ -182,18 +182,29 @@ CRONJOBS = [
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'django_debug.log'),
+            'filename': os.path.join(BASE_DIR, 'mailing/logs/mailing.log'),  # путь к лог-файлу
+            'formatter': 'verbose',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['mailing/logs/mailing.log'],  # Логи теперь будут записываться только в файл
+            'handlers': ['file'],
             'level': 'DEBUG',
-            'propagate': False,
+            'propagate': True,
         },
     },
 }
