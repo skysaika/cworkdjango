@@ -171,40 +171,9 @@ else:
     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-
-# Настройки для Cron
-CRONJOBS = [
-    ('*/5 * * * *', 'django.core.management.call_command', ['send_mail'])
-]
-
-
 # Вывод логов в файл: mailing/logs/mailing.log
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'mailing/logs/mailing.log'),  # путь к лог-файлу
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
+logs_path = BASE_DIR / 'mailing/logs/mailing.log'
+
+CRONJOBS = [
+    ('* * * * *', 'django.core.management.call_command', ['send_mail'], f'>> {logs_path}')
+]
