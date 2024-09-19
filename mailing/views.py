@@ -3,6 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.utils import timezone
+import pytz
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from .forms import MessageForm, MailingForm
@@ -43,8 +45,10 @@ class MessageCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('mailing:message_list')
 
     def form_valid(self, form):
-        """Создаваемое сообщение принадлежит текущему пользователю"""
+        """Создаваемая рассылка принадлежит текущему пользователю"""
         form.instance.owner = self.request.user
+        form.instance.start_time = timezone.now()  # Устанавливаем текущее время
+        form.instance.end_time = timezone.now() + timezone.timedelta(days=1)  # Устанавливаем время окончания на 1 день позже
         return super().form_valid(form)
 
 

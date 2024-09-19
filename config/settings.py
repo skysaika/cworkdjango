@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
     'users',
     'vlog',
+
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -165,3 +167,9 @@ else:
     EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+logs_path = BASE_DIR / 'mailing/logs/mailing.log'
+
+CRONJOBS = [
+    ('*/1 * * * *', 'mailing.management.commands.send_mail', f'>> {logs_path}')
+]

@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import pytz
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -96,10 +97,19 @@ class Mailing(models.Model):
         if self.end_time and self.start_time and self.end_time <= self.start_time:
             raise ValidationError("Дата окончания должна быть больше даты начала.")
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Проверка timezone start_time и end_time
+        if self.start_time:
+            self.start_time = timezone.localtime(self.start_time)
+        if self.end_time:
+            self.end_time = timezone.localtime(self.end_time)
 
 
     def __str__(self):
         return f'{self.message.title} - {self.start_time}'
+
+
 
     class Meta:
         verbose_name = 'рассылка'
