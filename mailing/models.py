@@ -21,7 +21,7 @@ class Message(models.Model):
     """
     title = models.CharField(max_length=150, verbose_name='заголовок сообщения')
     body = models.TextField(verbose_name='текст сообщения')
-    recipient = models.ManyToManyField(Client, related_name='messages', verbose_name='клиенты')
+    recipients = models.ManyToManyField(Client, related_name='recipients', verbose_name='получатели')
     is_published = models.BooleanField(default=False, verbose_name='опубликовано')
 
     # сообщение принадлежит текущему пользователю:
@@ -80,8 +80,8 @@ class Mailing(models.Model):
     ]
     send_name = models.CharField(max_length=255, verbose_name='имя рассылки', **NULLABLE)
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='связанное сообщение')
-    start_time = models.DateTimeField(verbose_name='дата начала рассылки', **NULLABLE)
-    end_time = models.DateTimeField(verbose_name='дата окончания рассылки', **NULLABLE)
+    start_time = models.DateTimeField(verbose_name='Начало рассылки', **NULLABLE)
+    end_time = models.DateTimeField(verbose_name='Окончание рассылки', **NULLABLE)
 
     frequency = models.CharField(max_length=20, choices=PERIOD_CHOICES,
                                  verbose_name='периодичность', **NULLABLE)
