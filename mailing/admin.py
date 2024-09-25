@@ -12,11 +12,12 @@ class MessageAdmin(admin.ModelAdmin):
 
 @admin.register(Mailing)
 class MailingAdmin(admin.ModelAdmin):
-    list_display = ('send_name', 'message', 'start_time', 'end_time', 'frequency', 'status', 'owner')
+    list_display = ('id','send_name', 'message', 'start_time', 'end_time', 'frequency', 'status', 'owner')
     list_filter = ('send_name', 'status', 'owner')
     search_fields = ('send_name',)
 
 
 @admin.register(Log)
 class LogAdmin(admin.ModelAdmin):
-    list_display = ('mailing', 'send_time', 'attempt_status')
+    list_display = ('mailing', 'mailing_id', 'send_time', 'attempt_status')
+

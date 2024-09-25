@@ -1,0 +1,212 @@
+[
+{
+    "model": "mailing.message",
+    "pk": 1,
+    "fields": {
+        "title": "test send #1",
+        "body": "test text #2",
+        "is_published": true,
+        "owner": 1,
+        "recipients": []
+    }
+},
+{
+    "model": "mailing.message",
+    "pk": 3,
+    "fields": {
+        "title": "Message #2",
+        "body": "Пробный мяч номер 2",
+        "is_published": true,
+        "owner": 10,
+        "recipients": []
+    }
+},
+{
+    "model": "mailing.message",
+    "pk": 4,
+    "fields": {
+        "title": "Message 3",
+        "body": "просто проверка связи number 3",
+        "is_published": true,
+        "owner": 10,
+        "recipients": []
+    }
+},
+{
+    "model": "mailing.message",
+    "pk": 6,
+    "fields": {
+        "title": "Сообщение номер 5",
+        "body": "проверка, что можно добавить владельца сообщения",
+        "is_published": true,
+        "owner": 1,
+        "recipients": []
+    }
+},
+{
+    "model": "mailing.message",
+    "pk": 7,
+    "fields": {
+        "title": "Сообщение номер 6",
+        "body": "кто автор?",
+        "is_published": true,
+        "owner": 1,
+        "recipients": []
+    }
+},
+{
+    "model": "mailing.message",
+    "pk": 8,
+    "fields": {
+        "title": "Сообщение 7",
+        "body": "сообщение от менеджера",
+        "is_published": true,
+        "owner": 10,
+        "recipients": []
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 1,
+    "fields": {
+        "send_name": "рассылка #1",
+        "message": 4,
+        "start_time": "2024-09-23T15:35:00Z",
+        "end_time": "2024-09-23T15:36:00Z",
+        "frequency": "once",
+        "status": "running",
+        "owner": 1
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 2,
+    "fields": {
+        "send_name": "Sending #2",
+        "message": 3,
+        "start_time": null,
+        "end_time": null,
+        "frequency": "once",
+        "status": "created",
+        "owner": 10
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 3,
+    "fields": {
+        "send_name": "Рассылка номер три",
+        "message": 4,
+        "start_time": null,
+        "end_time": null,
+        "frequency": "once",
+        "status": "running",
+        "owner": 10
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 6,
+    "fields": {
+        "send_name": "Рассылка номер 6",
+        "message": 7,
+        "start_time": "2024-09-20T14:48:00Z",
+        "end_time": "2024-09-20T14:50:00Z",
+        "frequency": "once",
+        "status": "running",
+        "owner": 1
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 7,
+    "fields": {
+        "send_name": "Test Cron Mailing",
+        "message": 8,
+        "start_time": "2024-09-23T13:26:00Z",
+        "end_time": "2024-09-23T13:27:00Z",
+        "frequency": "once",
+        "status": "running",
+        "owner": 1
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 8,
+    "fields": {
+        "send_name": "Send 23.09.24",
+        "message": 3,
+        "start_time": "2024-09-23T14:27:00Z",
+        "end_time": "2024-09-23T14:28:00Z",
+        "frequency": "once",
+        "status": "running",
+        "owner": 1
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 9,
+    "fields": {
+        "send_name": "Test send cron job from 23/09",
+        "message": 8,
+        "start_time": "2024-09-23T14:30:00Z",
+        "end_time": "2024-09-23T14:31:00Z",
+        "frequency": "once",
+        "status": "running",
+        "owner": 1
+    }
+},
+{
+    "model": "mailing.mailing",
+    "pk": 10,
+    "fields": {
+        "send_name": "Send 25.09.24",
+        "message": 3,
+        "start_time": "2024-09-25T02:40:00Z",
+        "end_time": "2024-09-25T02:41:00Z",
+        "frequency": "once",
+        "status": "running",
+        "owner": 1
+    }
+},
+{
+    "model": "mailing.log",
+    "pk": 1,
+    "fields": {
+        "send_time": "2024-09-24T17:43:59.466Z",
+        "attempt_status": "success",
+        "server_response": "11111",
+        "mailing": 7
+    }
+},
+{
+    "model": "mailing.log",
+    "pk": 2,
+    "fields": {
+        "send_time": "2024-09-24T17:44:42.976Z",
+        "attempt_status": "success",
+        "server_response": "1111",
+        "mailing": 9
+    }
+},
+{
+    "model": "mailing.log",
+    "pk": 3,
+    "fields": {
+        "send_time": "2024-09-24T17:47:30.769Z",
+        "attempt_status": "success",
+        "server_response": "1",
+        "mailing": 9
+    }
+},
+{
+    "model": "mailing.log",
+    "pk": 4,
+    "fields": {
+        "send_time": "2024-09-24T23:27:59.546Z",
+        "attempt_status": "success",
+        "server_response": "222",
+        "mailing": 1
+    }
+}
+]

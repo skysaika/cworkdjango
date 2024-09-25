@@ -21,7 +21,7 @@ class Message(models.Model):
     """
     title = models.CharField(max_length=150, verbose_name='заголовок сообщения')
     body = models.TextField(verbose_name='текст сообщения')
-    recipient = models.ManyToManyField(Client, related_name='messages', verbose_name='клиенты')
+    recipients = models.ManyToManyField(Client, related_name='recipients', verbose_name='получатели')
     is_published = models.BooleanField(default=False, verbose_name='опубликовано')
 
     # сообщение принадлежит текущему пользователю:
@@ -80,8 +80,8 @@ class Mailing(models.Model):
     ]
     send_name = models.CharField(max_length=255, verbose_name='имя рассылки', **NULLABLE)
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='связанное сообщение')
-    start_time = models.DateTimeField(verbose_name='дата начала рассылки', **NULLABLE)
-    end_time = models.DateTimeField(verbose_name='дата окончания рассылки', **NULLABLE)
+    start_time = models.DateTimeField(verbose_name='Начало рассылки', **NULLABLE)
+    end_time = models.DateTimeField(verbose_name='Окончание рассылки', **NULLABLE)
 
     frequency = models.CharField(max_length=20, choices=PERIOD_CHOICES,
                                  verbose_name='периодичность', **NULLABLE)
@@ -130,7 +130,7 @@ class Log(models.Model):
     send_time = models.DateTimeField(auto_now_add=True, verbose_name='время последней попытки', **NULLABLE)
     attempt_status = models.CharField(max_length=15, choices=STATUS_CHOICES, verbose_name='статус попытки', **NULLABLE)
     server_response = models.TextField(max_length=255, verbose_name='ответ сервера', **NULLABLE)
-    mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, verbose_name='рассылка', **NULLABLE)
+    mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, verbose_name='рассылка', **NULLABLE, related_name='mail_logs')
 
     def __str__(self):
         return f'{self.mailing.message.title} - {self.send_time}'

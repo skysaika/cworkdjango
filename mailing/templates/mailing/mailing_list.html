@@ -14,11 +14,11 @@
         </div>
     </div>
     <!-- список всех рассылок -->
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for object in object_list %} <!-- цикл перебирает все рассылки-->
+{#    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">#}
+{#        {% for object in object_list %} <!-- цикл перебирает все рассылки-->#}
             <!-- карточка рассылки в подшаблоне -->
             {% include 'main/includes/inc_mailing_card.html' %}
-        {% endfor %}
-    </div>
+{#        {% endfor %}#}
+{#    </div>#}
 
 {% endblock %}

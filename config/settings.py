@@ -6,12 +6,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-import sys
-from pathlib import Path
 
-from dotenv import load_dotenv
+from pathlib import Path
 import os
-from django.utils.log import DEFAULT_LOGGING
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,7 +46,7 @@ INSTALLED_APPS = [
 
     'users',
     'vlog',
-
+    "django_apscheduler",
 ]
 
 MIDDLEWARE = [
@@ -124,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -171,9 +169,16 @@ else:
     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-# Вывод логов в файл: mailing/logs/mailing.log
-logs_path = BASE_DIR / 'mailing/logs/mailing.log'
+# CRONJOBS - настройки для запуска задания cron
+# CRONJOBS = [
+#     ('1 0 * * *', 'mailing.cron.send_email', ['ежедневно']),
+#     ('1 0 * * 0', 'mailing.cron.send_email', ['еженедельно']),
+#     ('0 0 1 * *', 'mailing.cron.send_email', ['ежемесячно']),
+# ]
 
 CRONJOBS = [
-    ('* * * * *', 'django.core.management.call_command', ['send_mail'], f'>> {logs_path}')
+    ('0 0 * * *', 'mailing.cron.my_func_once'),
+    ('0 0 1 * *', 'mailing.cron.my_func_daily'),
+    ('0 0 * * 0', 'mailing.cron.my_func_weekly'),
+    ('0 0 1 1 *', 'mailing.cron.my_func_monthly'),
 ]

@@ -2,38 +2,55 @@
 {% load static %}
 
 {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">  <!-- Левый блок -->
 
-    <h1>Статистика по рассылкам</h1>
-    <ul>
-        <li>Общее количество рассылок: {{ total_mailings_count }}</li>
-        <li>Количество проведенных рассылок: {{ conducted_mailings_count }}</li>
-        <li>Общее количество уникальных клиентов: {{ unique_clients_count }}</li>
-        <li>Общее количество активных клиентов: {{ active_clients_count }}</li>
-    </ul>
-    <h2>Последние сообщения</h2>
-    <ul>
-        {% for message in last_messages %}
-            <li>{{ message.title }} - {{ message.body|truncatewords:10 }}</li>
-        {% empty %}
-            <li>Нет сообщений.</li>
-        {% endfor %}
-    </ul>
+                <h1>Статистика по рассылкам</h1>
+                <ul>
+                    <li>Общее количество рассылок: {{ total_mailings_count }}</li>
+                    <li>Количество проведенных рассылок: {{ conducted_mailings_count }}</li>
+                    <li>Общее количество уникальных клиентов: {{ unique_clients_count }}</li>
+                    <li>Общее количество активных клиентов: {{ active_clients_count }}</li>
+                </ul>
+                <h2>Последние сообщения</h2>
+                <ul>
+                    {% for message in last_messages %}
+                        <li>{{ message.title }} - {{ message.body|truncatewords:10 }}</li>
+                    {% empty %}
+                        <li>Нет сообщений.</li>
+                    {% endfor %}
+                </ul>
 
-    <h2>Последние рассылки</h2>
-    <ul>
-        {% for mailing in last_mailings %}
-            <li>{{ mailing.send_name }} - {{ mailing.start_time }}</li>
-        {% empty %}
-            <li>Нет рассылок.</li>
-        {% endfor %}
-    </ul>
+                <h2>Последние рассылки</h2>
+                <ul>
+                    {% for mailing in last_mailings %}
+                        <li>{{ mailing.send_name }} - {{ mailing.start_time }}</li>
+                    {% empty %}
+                        <li>Нет рассылок.</li>
+                    {% endfor %}
+                </ul>
 
-    <h2>Наши клиенты</h2>
-    <ul>
-        {% for client in last_active_clients %}
-            <li>{{ client.name }} - {{ client.email }}</li>
-        {% empty %}
-            <li>Нет активных клиентов.</li>
-        {% endfor %}
-    </ul>
+                <h2>Наши клиенты</h2>
+                <ul>
+                    {% for client in last_active_clients %}
+                        <li>{{ client.name }} - {{ client.email }}</li>
+                    {% empty %}
+                        <li>Нет активных клиентов.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-6">  <!-- Правый блок -->
+                <h2>Случайные 3 поста </h2>
+                <ul>
+                    {% for post in posts %}
+                        <li>{{ post.title }}</li>
+                    {% empty %}
+                        <li>Нет постов.</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
