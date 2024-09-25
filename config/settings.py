@@ -38,12 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_crontab',
+
     'main',
     'clients',
     'mailing',
 
     'users',
     'vlog',
+    "django_apscheduler",
 ]
 
 MIDDLEWARE = [
@@ -165,3 +168,17 @@ else:
     EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# CRONJOBS - настройки для запуска задания cron
+# CRONJOBS = [
+#     ('1 0 * * *', 'mailing.cron.send_email', ['ежедневно']),
+#     ('1 0 * * 0', 'mailing.cron.send_email', ['еженедельно']),
+#     ('0 0 1 * *', 'mailing.cron.send_email', ['ежемесячно']),
+# ]
+
+CRONJOBS = [
+    ('0 0 * * *', 'mailing.cron.my_func_once'),
+    ('0 0 1 * *', 'mailing.cron.my_func_daily'),
+    ('0 0 * * 0', 'mailing.cron.my_func_weekly'),
+    ('0 0 1 1 *', 'mailing.cron.my_func_monthly'),
+]
