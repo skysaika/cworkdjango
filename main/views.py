@@ -43,7 +43,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
         # Последние 3 активных клиента (созданных пользователем, например, с полем owner)
         context['last_active_clients'] = Client.objects.filter(is_active=True).order_by('-id')[:3]
 
-        # Посление 3 поста
-        context['last_posts'] = VlogPost.objects.order_by('-id')[:3]
+        # 3 случайных поста
+        context['posts'] = VlogPost.objects.order_by('-id')[:3]
 
         return context
