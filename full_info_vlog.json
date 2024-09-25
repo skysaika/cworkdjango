@@ -1,0 +1,114 @@
+[
+{
+    "model": "vlog.vlogpost",
+    "pk": 2,
+    "fields": {
+        "title": "А логи то создаются",
+        "slug": "-ed4744",
+        "content": "111",
+        "preview": "",
+        "created": "2024-09-24T23:36:29.456Z",
+        "is_published": true,
+        "view_count": 1,
+        "owner": null
+    }
+},
+{
+    "model": "vlog.vlogpost",
+    "pk": 3,
+    "fields": {
+        "title": "test post 2",
+        "slug": "test-post-2-92904d",
+        "content": "123",
+        "preview": "",
+        "created": "2024-09-25T12:55:27.266Z",
+        "is_published": true,
+        "view_count": 0,
+        "owner": null
+    }
+},
+{
+    "model": "vlog.vlogpost",
+    "pk": 4,
+    "fields": {
+        "title": "Test post 3",
+        "slug": "test-post-3-dd534e",
+        "content": "4566",
+        "preview": "",
+        "created": "2024-09-25T12:55:37.077Z",
+        "is_published": true,
+        "view_count": 0,
+        "owner": null
+    }
+},
+{
+    "model": "vlog.vlogpost",
+    "pk": 5,
+    "fields": {
+        "title": "Post 4",
+        "slug": "post-4-06c6f5",
+        "content": "567",
+        "preview": "",
+        "created": "2024-09-25T12:55:54.614Z",
+        "is_published": true,
+        "view_count": 4,
+        "owner": null
+    }
+},
+{
+    "model": "vlog.vlogpost",
+    "pk": 6,
+    "fields": {
+        "title": "POst 7",
+        "slug": "post-5-b80422",
+        "content": "789",
+        "preview": "",
+        "created": "2024-09-25T12:56:27.191Z",
+        "is_published": true,
+        "view_count": 2,
+        "owner": null
+    }
+},
+{
+    "model": "vlog.vlogpost",
+    "pk": 7,
+    "fields": {
+        "title": "Post 6",
+        "slug": "post-5-18fb5d",
+        "content": "789",
+        "preview": "",
+        "created": "2024-09-25T12:56:47.135Z",
+        "is_published": true,
+        "view_count": 2,
+        "owner": null
+    }
+},
+{
+    "model": "vlog.vlogpost",
+    "pk": 8,
+    "fields": {
+        "title": "Post number 5",
+        "slug": "post-number-5-ded72a",
+        "content": "this my post",
+        "preview": "",
+        "created": "2024-09-25T12:57:09.462Z",
+        "is_published": true,
+        "view_count": 2,
+        "owner": null
+    }
+},
+{
+    "model": "vlog.vlogpost",
+    "pk": 9,
+    "fields": {
+        "title": "Post 9",
+        "slug": "post-9-87a4be",
+        "content": "test 9",
+        "preview": "",
+        "created": "2024-09-25T13:36:09.578Z",
+        "is_published": true,
+        "view_count": 0,
+        "owner": 1
+    }
+}
+]
