@@ -130,7 +130,7 @@ class Log(models.Model):
     send_time = models.DateTimeField(auto_now_add=True, verbose_name='время последней попытки', **NULLABLE)
     attempt_status = models.CharField(max_length=15, choices=STATUS_CHOICES, verbose_name='статус попытки', **NULLABLE)
     server_response = models.TextField(max_length=255, verbose_name='ответ сервера', **NULLABLE)
-    mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, verbose_name='рассылка', **NULLABLE)
+    mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, verbose_name='рассылка', **NULLABLE, related_name='mail_logs')
 
     def __str__(self):
         return f'{self.mailing.message.title} - {self.send_time}'
