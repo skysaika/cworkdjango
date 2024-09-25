@@ -61,7 +61,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for log in logs %}
+                                {% for log in object.mail_logs.all %}
                                 <tr>
                                     <td>{{ log.send_time }}</td>
                                     <td>{{ log.get_attempt_status_display }}</td>
