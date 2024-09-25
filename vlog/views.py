@@ -15,6 +15,10 @@ class VlogPostCreateView(LoginRequiredMixin, CreateView):
     fields = ('title', 'content', 'preview', 'is_published')
     success_url = reverse_lazy('vlog:post_list')
 
+    def form_valid(self, form):
+        form.instance.owner = self.request.user  # Устанавливаем владельца поста
+        return super().form_valid(form)
+
 
     # def get_object(self, queryset=None):
     #     """Проверяем что пользователь не может редактировать чужой пост"""
@@ -22,6 +26,8 @@ class VlogPostCreateView(LoginRequiredMixin, CreateView):
     #     if self.object.owner != self.request.user and not self.request.user.is_staff:
     #         raise Http404('Вы не можете редактировать чужую собаку')  # может владелец и модератор
     #     return self.object
+
+
 
 
 class VlogPostUpdateView(LoginRequiredMixin, UpdateView):
